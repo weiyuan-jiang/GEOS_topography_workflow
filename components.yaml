@@ -15,3 +15,8 @@ ecbuild:
   remote: git@github.com:GEOS-ESM/ecbuild.git
   tag: geos/v1.3.0
 
+ncar_topo:
+  local: ./@ncar_topo
+  remote: git@github.com:GEOS-ESM/Topo.git
+  tag: master
+

@@ -103,7 +103,7 @@ include_directories(${MPI_Fortran_INCLUDE_PATH})
 esma_mepo_style(env env_dir)
 esma_add_subdirectory (${env_dir})
 # Recursively build source tree
-add_subdirectory (src)
+add_subdirectory (@ncar_topo)
 
 # https://www.scivision.dev/cmake-auto-gitignore-build-dir/
 # --- auto-ignore build directory
