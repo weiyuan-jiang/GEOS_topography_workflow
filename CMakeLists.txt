@@ -104,6 +104,7 @@ esma_mepo_style(env env_dir)
 esma_add_subdirectory (${env_dir})
 # Recursively build source tree
 add_subdirectory (@ncar_topo)
+add_subdirectory (utilities)
 
 # https://www.scivision.dev/cmake-auto-gitignore-build-dir/
 # --- auto-ignore build directory
