@@ -27,5 +27,4 @@ endif ()
 
 install(PROGRAMS scrip_to_cube.py DESTINATION bin)
 install(PROGRAMS scrip_to_restart.py DESTINATION bin)
-install(PROGRAMS run_topo_generation.py DESTINATION bin)
 install(PROGRAMS full_workflow.sh DESTINATION bin)
