@@ -9,8 +9,8 @@
 #SBATCH --mail-type=ALL
 #SBATCH --no-requeue
 
-export TOPODIR=/discover/swdev/bmauer/packages/ncartopo_gmao_build/GEOS_topography_workflow/install-release/bin
-#export TOPODIR=/discover/swdev/bmauer/packages/ncartopo_gmao_build/GEOS_topography_workflow/install-debug/bin
+# put path to path to bin here
+export TOPODIR=
 source ${TOPODIR}/g5_modules.sh
 
 echo "STARTING"
@@ -18,6 +18,7 @@ echo "STARTING"
 raw_latlon_data="/discover/nobackup/bmauer/gmted_topo/gmted_fix_superior/gmted_fixed_anartica_superior_caspian.nc4"
 intermediate_cube="c3000.gmted_fixedanarticasuperior.nc"
 source_topo="gmted_intel"
+ 
 cat << _EOF_ > bin_to_cube.nl
 &binparams
   raw_latlon_data_file='$raw_latlon_data'
@@ -26,8 +27,13 @@ cat << _EOF_ > bin_to_cube.nl
 /
 _EOF_
 
-#${TOPODIR}/bin_to_cube.x
+if [[ ! -e landm_coslat.nc ]]; then
+   ln -s $TOPODIR/landm_coslat.nc landm_coslat.nc 
+fi
 
+${TOPODIR}/bin_to_cube.x
+
+res=("12" "24" "48" "90" "180" "360" "720" "1120" "1440" "2880")
 cutoff=25
 smoothmap[12]="773.91"
 smoothmap[24]="386.52"
@@ -39,9 +45,6 @@ smoothmap[720]="12.86"
 smoothmap[1120]="8.26"
 smoothmap[1440]="6.43"
 smoothmap[2880]="3.21"
-
-#res=("12" "24" "48" "90" "180" "360" "720" "1120" "1440" "2880")
-res=("720" "1440")
 
 for n in "${res[@]}";
 do
