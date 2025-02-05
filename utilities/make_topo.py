@@ -154,8 +154,12 @@ _EOF_
    else
      set intermediate_cube = c3000.gmted_fixedanarticasuperior.nc
    endif
+   set jmax_segments=''
+   if ($im == 2880) then
+      set jmax_segments = --jmax_segments=32
+   endif
    set output_grid = PE${{im}}x${{jm}}-CF
-   bin/cube_to_target.x --grid_descriptor_file=$scriptfile --intermediate_cs_name=$intermediate_cube --output_data_directory=$output_dir --smoothing_scale=${{smooths[$count]}} --name_email_of_creator='gmao' --fine_radius=0 --output_grid=$output_grid --source_data_identifier=$source_topo
+   bin/cube_to_target.x --grid_descriptor_file=$scriptfile --intermediate_cs_name=$intermediate_cube --output_data_directory=$output_dir --smoothing_scale=${{smooths[$count]}} --name_email_of_creator='gmao' --fine_radius=0 --output_grid=$output_grid --source_data_identifier=$source_topo $jmax_segments
 
    rm $scriptfile
 
